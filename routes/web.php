@@ -25,3 +25,7 @@ Route::get('/employee-list', 'PagesController@employee');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
