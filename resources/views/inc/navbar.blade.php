@@ -9,10 +9,22 @@
       <ul class="navbar-nav mr-auto">
           <li><a class="nav-link disabled"></a></li>
           <li><a class="nav-link disabled"></a></li>
-        <li class="nav-item">
-          <a class="nav-link" href="/">Homepage</a>
-        </li>
       </ul>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+              <li><a class="nav-link disabled"></a></li>
+              <li><a class="nav-link disabled"></a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">Homepage</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/companies">Companies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/employees">Employees</a>
+            </li>
+          </ul>
       
       <nav class="nav navbar-nav navbar-right">
       <ul style="float:right;">
