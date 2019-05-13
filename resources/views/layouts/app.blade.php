@@ -14,6 +14,7 @@
 
 </head>
 <body>
+      
     @include('inc.navbar')
     @show
 
@@ -22,9 +23,9 @@
         @yield('content')
     </div>
 
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    {{-- <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'article-ckeditor' );
-    </script>
+    </script> --}}
 </body>
 </html>

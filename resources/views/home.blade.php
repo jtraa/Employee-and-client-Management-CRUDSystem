@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    Welcome to the Admin App! Now you can add, edit, delete companies and/or employees.
                 </div>
             </div>
         </div>

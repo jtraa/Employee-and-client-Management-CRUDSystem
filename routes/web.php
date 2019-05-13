@@ -13,10 +13,6 @@
 
 Route::get('/', 'PagesController@index');
 
-Route::get('/company-list', 'PagesController@company');
-
-Route::get('/employee-list', 'PagesController@employee');
-
 
 // Route::get('/employee-list/{id}/{name}', function ($id, $name) {
 //     return 'This is user ' .$name. ' with an id of ' .$id;
