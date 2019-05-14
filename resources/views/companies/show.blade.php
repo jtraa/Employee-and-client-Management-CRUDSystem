@@ -8,9 +8,7 @@
     <br><br>
     <center><h1 class="title">{{$companies->name}}</h1>
     <br><br>
-
-    <img src={{$companies->logo}}><br><br>
-
+    <center><img style="width: 50%" src="/storage/logos/{{$companies->logo}}"></center>
     <br><br>
     <div>
         {{$companies->name}}<br>

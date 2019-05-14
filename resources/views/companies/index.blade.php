@@ -10,16 +10,25 @@
     @if(count($companies) > 0)
         @foreach($companies as $company)
             <div class="well">
-                <center><h3><a href="/companies/{{$company->id}}">
-                   {{$company->name}} 
-                   {{$company->website}}
-                </h3></a>
-                <small> Added on {{$company->created_at}}</small>
-                </center>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                            <center><img style="width: 100%" src="/storage/logos/{{$company->logo}}"></center>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                            <center><h3><a href="/companies/{{$company->id}}">
+                                {{$company->name}} 
+                                {{$company->website}}
+                             </h3></a>
+                             <small> Added on {{$company->created_at}}</small>
+                             </center>
+                        </div>
+                </div>
+                
             </div>
             <br>
+            {{$companies->links()}}
         @endforeach
-        {{$companies->links()}}
+        
     @else
         <center><p> No companies found</p></center>
     @endif

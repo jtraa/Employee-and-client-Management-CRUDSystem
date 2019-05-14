@@ -17,10 +17,12 @@
                 <small> Added on {{$employee->created_at}}</small>
                 </center>
             </div><br>
+            
         @endforeach
         <br>
-        {{$employees->links()}}
+       
     @else
         <center><p> No employees found</p></center>
     @endif
+   {{$employees->links()}}
 @endsection

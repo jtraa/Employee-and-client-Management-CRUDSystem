@@ -7,7 +7,7 @@
     <center><h1 class="title">Add Company</h1></center>
     <br><br>
 
-    {!! Form::open(['action' => 'TablesController@store', 'method' => 'POST']) !!}
+    {!! Form::open(['action' => 'TablesController@store', 'method' => 'POST', 'enctype' =>  'multipart/form-data']) !!}
     <div class="form-group">
         {{Form::label('name', 'Name')}}
         {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Name', 'autocomplete' => 'off'])}}
@@ -17,8 +17,7 @@
             {{Form::text('email', '', ['class' => 'form-control', 'placeholder' => 'Email', 'autocomplete' => 'off'])}}
     </div>
     <div class="form-group">
-            {{Form::label('logo', 'Logo')}}
-            {{Form::text('logo', '', ['class' => 'form-control', 'placeholder' => 'Image', 'autocomplete' => 'off'])}}
+            {{Form::file('logo')}}
     </div>
     <div class="form-group">
             {{Form::label('website', 'Website')}}

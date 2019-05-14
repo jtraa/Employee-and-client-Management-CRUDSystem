@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Companies;
 
 class TablesController extends Controller
@@ -25,7 +26,7 @@ class TablesController extends Controller
      */
     public function index()
     {
-        $companies = Companies::Orderby('name', 'asc')->paginate(5);
+        $companies = Companies::Orderby('name', 'asc')->paginate(10);
         return view('companies.index')->with('companies', $companies);
     }
 
@@ -48,14 +49,31 @@ class TablesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
+            'logo' => 'image|nullable|min:10|max:1999'
         ]);
+
+        //upload filehandling
+        if($request->hasFile('logo')){
+            //Get filename with the extension
+            $filenameWithExt = $request->file('logo')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just ext
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //Upload the image
+            $path = $request->file('logo')->storeAs('public/logos', $fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
 
         //Create Post
         $companies = new Companies;
         $companies->name = $request->input('name');
         $companies->email = $request->input('email');
-        $companies->logo = $request->input('logo');
+        $companies->logo = $fileNameToStore;
         $companies->website = $request->input('website');
         $companies->save();
 
@@ -96,15 +114,32 @@ class TablesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
+            'logo' => 'image|nullable|min:10|max:1999'
         ]);
+
+         //upload filehandling
+         if($request->hasFile('logo')){
+            //Get filename with the extension
+            $filenameWithExt = $request->file('logo')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get just ext
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //Upload the image
+            $path = $request->file('logo')->storeAs('public/logos', $fileNameToStore);
+        }
 
         //Create Post
         $companies = Companies::find($id);
         $companies->name = $request->input('name');
         $companies->email = $request->input('email');
-        $companies->logo = $request->input('logo');
         $companies->website = $request->input('website');
+        if($request->hasFile('logo')){
+            $companies->logo = $fileNameToStore;
+        }
         $companies->save();
 
         return redirect('/companies')->with('success', 'Post Updated');
@@ -119,6 +154,12 @@ class TablesController extends Controller
     public function destroy($id)
     {
         $company = Companies::find($id);
+
+        if($company->logo != 'noimage.jpg'){
+            //Delete
+            Storage::Delete('public/logos/'.$company->logo);
+        }
+
         $company->delete();
         return redirect('/companies')->with('success', 'Post Removed');
     }

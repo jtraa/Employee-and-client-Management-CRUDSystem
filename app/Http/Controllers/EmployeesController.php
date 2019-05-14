@@ -25,7 +25,7 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $employees = Employee::Orderby('name', 'asc')->paginate(5);
+        $employees = Employee::Orderby('name', 'asc')->paginate(10);
         return view('employees.index')->with('employees', $employees);
     }
 
